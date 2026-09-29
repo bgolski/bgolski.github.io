@@ -6,7 +6,7 @@ Status: implementation direction for the reviewed portfolio tickets. Public copy
 
 Build a static TypeScript portfolio in `bgolski/bgolski.github.io` with Astro. GitHub Actions will build a Pages artifact for `https://bradleygolski.com`; Cloudflare continues to manage DNS. The public pages must contain their core text and links in generated HTML. No application server or client-side router is needed for those pages. AWS is reserved for the contact endpoint (HTTP API, Lambda, SES), which will be budgeted and checked before launch.
 
-The current published main branch serves a redirect at `/` and contains an older `album-visualizer/` static export. The portfolio review branch excludes project application files. Each project application deploys from its own repository; `bgolski/album-wall` already does so at `/album-wall/`. Preserve the live `/album-visualizer/` URL until an independent repository deployment or approved redirect is verified. Do not change DNS or the live Pages source while developing the candidate.
+The current published main branch serves a redirect at `/` and contains an older `album-visualizer/` static export. The portfolio review branch excludes project application files. Each project application deploys from its own repository; `bgolski/album-wall` already does so at `/album-wall/`. The existing `bgolski/album-wall` project site serves `/album-wall/`; keep `/album-visualizer/` as a small legacy redirect to that route after verifying the target. The portfolio case study lives at `/projects/album-wall/`. Do not change DNS or the live Pages source while developing the candidate.
 
 ## Route and content map
 
@@ -20,8 +20,8 @@ The current published main branch serves a redirect at `/` and contains an older
 | `/contact/` | Static form and visible `brad@bradleygolski.com` fallback | Send a message through the AWS endpoint after setup |
 | `/resume/` | Astro page with PDF preview and download fallback | View the latest published resume |
 | `/resume.pdf` | PDF copied from `bgolski/resume` during the build | Download the PDF |
-| `/album-visualizer/` | Independent project site or approved redirect; outside this build artifact | Keep the URL named in the brief working |
-| `/album-wall/` | Independent Pages project repository | Keep the newer app URL working |
+| `/album-visualizer/` | Static redirect to `/album-wall/`; no application assets in this repository | Preserve the URL named in the brief |
+| `/album-wall/` | Independent `bgolski/album-wall` Pages project repository | Open the independently maintained app |
 
 The resume repository remains the source of its PDF. The site build fetches a checked PDF from a specified resume commit, or from `main` for an ordinary build. A workflow in the resume repository dispatches a rebuild when its `main` branch changes. The site build fails if the PDF cannot be validated, preserving the last published artifact.
 
@@ -37,7 +37,7 @@ Expected reusable pieces: base layout, site header/footer, project card, project
 
 Keep the portfolio itself on GitHub Pages. Before enabling contact delivery, review the expected HTTP API, Lambda, SES, logging, and alerting cost at anticipated traffic; set a low AWS spend alert and bounded throttling/concurrency. CORS does not prevent non-browser requests, so delivery and spend checks remain necessary. Confirm SES sender identity and the Cloudflare forwarding rule with direct and form-delivery tests. Do not change the existing Cloudflare MX records for inbound mail.
 
-Package only the portfolio routes and `.nojekyll` with each site build. Check root pages, project case studies, the PDF, and 404 before upload. Verify the independently deployed project URL separately; the portfolio artifact must contain no project application subtree. Keep the candidate workflow on a review branch until the owner approves the cutover. Record the current Pages source, custom-domain setting, and prior deployment or commit before switching to Actions. Recovery is to restore the previous Pages source/deployment or deploy its recorded artifact, then recheck the apex and both independently served album routes. The custom domain stays configured in GitHub Pages settings; a repository `CNAME` file is ignored for an Actions-published site.
+Package only the portfolio routes and `.nojekyll` with each site build. Check root pages, project case studies, the PDF, and 404 before upload. Verify `/album-wall/` separately and test the small `/album-visualizer/` redirect; the portfolio artifact must contain no project application subtree. Keep the candidate workflow on a review branch until the owner approves the cutover. Record the current Pages source, custom-domain setting, and prior deployment or commit before switching to Actions. Recovery is to restore the previous Pages source/deployment or deploy its recorded artifact, then recheck the apex and both independently served album routes. The custom domain stays configured in GitHub Pages settings; a repository `CNAME` file is ignored for an Actions-published site.
 
 ## References
 
