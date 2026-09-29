@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+const projects = await getCollection('projects');
+const sortedProjects = [...projects].sort((a, b) => a.data.title.localeCompare(b.data.title));
+
+---
+<BaseLayout
+  title="Projects | Bradley Golski"
+  description="Browse a curated list of projects."
+>
+  {sortedProjects.length > 0 ? (
+    <section aria-labelledby="projects-heading">
+      <h1 id="projects-heading">Projects</h1>
+      <div class="projects-grid">
+        {sortedProjects.map(project => <ProjectCard entry={project} />)}
+      </div>
+    </section>
+  ) : (
+    <section aria-labelledby="no-projects-heading">
+      <h1 id="no-projects-heading">No projects found.</h1>
+      <p>There are currently no projects to display.</p>
+    </section>
+  )}
+</BaseLayout>
