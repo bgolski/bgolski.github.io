@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="Bradley Golski | Resume"
+  description="Resume for Bradley Golski, software developer."
+>
+  <h1>Resume</h1>
+  <object data="/resume.pdf" type="application/pdf" width="100%" height="600px">
+    <p>Your browser does not support PDFs. <a href="/resume.pdf">Download the PDF</a>.</p>
+  </object>
+  <p><a href="/resume.pdf" download>Download PDF</a></p>
+</BaseLayout>
