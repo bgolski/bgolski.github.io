@@ -1,0 +1,32 @@
+---
+interface Props {
+  entry: any;
+}
+const { entry } = Astro.props;
+const { title, summary, highlights, techStack, screenshots, repository, live } = entry.data;
+const slug = entry.id;
+const primaryScreenshot = screenshots[0];
+---
+<article class="project-card">
+  <h2><a href={`/projects/${slug}/`}>{title}</a></h2>
+  <p>{summary}</p>
+  <section>
+    <h3>Highlights</h3>
+    <ul>
+      {highlights.map((h: string) => <li>{h}</li>)}
+    </ul>
+  </section>
+  <section>
+    <h3>Tech Stack</h3>
+    <ul>
+      {techStack.map((t: string) => <li>{t}</li>)}
+    </ul>
+  </section>
+  <section>
+    <img src={primaryScreenshot.src} alt={primaryScreenshot.alt} />
+  </section>
+  <section>
+    {live && <a href={live} target="_blank" rel="noopener">Live</a>}
+    {repository && <a href={repository} target="_blank" rel="noopener">Repository</a>}
+  </section>
+</article>
