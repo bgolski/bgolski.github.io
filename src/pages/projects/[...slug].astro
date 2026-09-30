@@ -1,0 +1,55 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((entry: CollectionEntry<'projects'>) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<'projects'>;
+}
+
+const { entry } = Astro.props;
+const { title, summary, highlights, techStack, reason, screenshots, repository, live } = entry.data;
+---
+<BaseLayout title={`${title} | Bradley Golski`} description={summary}>
+  <article class="project-detail">
+    <p><a href="/projects/">All projects</a></p>
+    <h1>{title}</h1>
+    <p>{summary}</p>
+
+    <section aria-labelledby="highlights-heading">
+      <h2 id="highlights-heading">Highlights</h2>
+      <ul>{highlights.map((highlight: string) => <li>{highlight}</li>)}</ul>
+    </section>
+
+    <section aria-labelledby="technology-heading">
+      <h2 id="technology-heading">Technology</h2>
+      <ul>{techStack.map((technology: string) => <li>{technology}</li>)}</ul>
+    </section>
+
+    <section aria-labelledby="reason-heading">
+      <h2 id="reason-heading">Why I built it</h2>
+      <p>{reason}</p>
+    </section>
+
+    <section aria-labelledby="preview-heading">
+      <h2 id="preview-heading">Preview</h2>
+      {screenshots.map((screenshot: { src: string; alt: string }) => (
+        <img src={screenshot.src} alt={screenshot.alt} loading="lazy" />
+      ))}
+    </section>
+
+    {(live || repository) && (
+      <nav aria-label="Project links">
+        {live && <a href={live}>Open project</a>}
+        {repository && <a href={repository}>View source</a>}
+      </nav>
+    )}
+  </article>
+</BaseLayout>
