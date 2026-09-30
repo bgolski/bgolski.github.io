@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title description">
+  <title id="title">Project preview placeholder</title>
+  <desc id="description">A simple purple and grey layout marking where a project screenshot will appear.</desc>
+  <rect width="960" height="540" fill="#f4f1f8"/>
+  <rect x="88" y="76" width="784" height="388" rx="16" fill="#fff" stroke="#989898" stroke-width="3"/>
+  <rect x="88" y="76" width="784" height="58" rx="16" fill="#7951A8"/>
+  <rect x="88" y="118" width="784" height="16" fill="#7951A8"/>
+  <circle cx="122" cy="105" r="8" fill="#fff" opacity=".8"/>
+  <circle cx="148" cy="105" r="8" fill="#fff" opacity=".6"/>
+  <circle cx="174" cy="105" r="8" fill="#fff" opacity=".4"/>
+  <rect x="148" y="193" width="664" height="210" rx="12" fill="#f4f1f8" stroke="#d9d0e4" stroke-width="2"/>
+  <text x="480" y="302" font-family="Arial, sans-serif" font-size="30" text-anchor="middle" fill="#4d3768">Screenshot coming soon</text>
+</svg>
