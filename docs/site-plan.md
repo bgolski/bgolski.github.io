@@ -14,8 +14,8 @@ The current published main branch serves a redirect at `/` and contains an older
 | --- | --- | --- |
 | `/` | Astro home page; approved introduction from `docs/content-inventory.md` | See the work and reach projects, resume, contact |
 | `/about/` | Approved biography and experience | Understand Bradley's work and approach |
-| `/projects/` | Validated project collection | Browse approved work, including projects without GitHub repositories |
-| `/projects/<slug>/` | One static detail page per approved project | Read highlights, technology, reasons, screenshots, links |
+| `/projects/` | Validated project collection | Browse the Album Wall and Resume builder case studies first; support future projects without GitHub repositories |
+| `/projects/<slug>/` | One static detail page per approved project | Read reusable case-study sections; show explicit copy and image placeholders until Bradley supplies the final content |
 | `/credentials/` | Approved certifications and technology groups, cross-checked against the resume | Review qualifications |
 | `/contact/` | Static form and visible `brad@bradleygolski.com` fallback | Send a message through the AWS endpoint after setup |
 | `/resume/` | Astro page with PDF preview and download fallback | View the latest published resume |
@@ -23,7 +23,7 @@ The current published main branch serves a redirect at `/` and contains an older
 | `/album-visualizer/` | Static redirect to `/album-wall/`; no application assets in this repository | Preserve the URL named in the brief |
 | `/album-wall/` | Independent `bgolski/album-wall` Pages project repository | Open the independently maintained app |
 
-The resume repository remains the source of its PDF. The site build fetches a checked PDF from a specified resume commit, or from `main` for an ordinary build. A workflow in the resume repository dispatches a rebuild when its `main` branch changes. The site build fails if the PDF cannot be validated, preserving the last published artifact.
+The resume repository remains the source of its PDF. The committed file is `BradleyGolskiResume.pdf` at repository root (`latexmkrc` copies it there). The site build fetches and validates that PDF from a specified resume commit, or from `main` for an ordinary build; it does not commit the PDF into the portfolio source. A workflow in the resume repository dispatches a rebuild when its `main` branch changes. The site build fails if the PDF cannot be validated, preserving the last published artifact.
 
 ## Visual direction
 
@@ -31,7 +31,7 @@ Use a calm, editorial layout suited to a software developer: a concise introduct
 
 Use the requested purple `#7951A8`, grey `#989898`, white, and black. Purple can mark actions and section accents; grey should primarily serve borders or muted surfaces until text contrast is measured. Choose darker text variants where needed to meet WCAG AA. Use a responsive content width, mobile-first spacing, visible keyboard focus, and semantic header, main, and footer regions. Navigation and primary content must work without JavaScript. Avoid animation that obscures content or ignores reduced-motion preferences.
 
-Expected reusable pieces: base layout, site header/footer, project card, project detail template, contact form, and SEO head. Public biography, certification status, project claims, and screenshots come from the approved content inventory, not from inference about repository names or the resume alone.
+Expected reusable pieces: base layout, site header/footer, project card, project detail template, contact form, and SEO head. The first two case studies use clearly labeled temporary copy and one shared generic preview asset. Bradley supplies their final descriptions and screenshots later. Biography, role history, and credentials may be drafted from the committed `bgolski/resume` source; avoid confidential employer details and obtain Bradley's final review before publication.
 
 ## Delivery, cost, and recovery
 
