@@ -1,6 +1,8 @@
 ---
+import type { CollectionEntry } from 'astro:content';
+
 interface Props {
-  entry: any;
+  entry: CollectionEntry<'projects'>;
 }
 const { entry } = Astro.props;
 const { title, summary, highlights, techStack, screenshots, repository, live } = entry.data;
