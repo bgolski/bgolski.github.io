@@ -9,7 +9,8 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro check && astro build",
-    "check": "astro check"
+    "check": "astro check",
+    "prebuild": "tsx scripts/fetch-resume.ts"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.10",
